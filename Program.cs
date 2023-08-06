@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Rule4.CustomMiddleware;
+using Rule4.Data;
+using Rule4.ServicesExtension;
 
 namespace Rule4
 {
@@ -7,27 +11,24 @@ namespace Rule4
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<DataContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("connection")));
+            builder.Services.ConfigureServices();
+            builder.Services.AddCors();
 
             var app = builder.Build();
+            app.UseStaticFiles();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(c => c.AllowAnyOrigin());
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
