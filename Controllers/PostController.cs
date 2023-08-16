@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using Rule4.Dto.Posts;
 using Rule4.Models;
 using Rule4.Services;
@@ -7,6 +6,7 @@ using Rule4.Services;
 namespace Rule4.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class PostController : ControllerBase
     {
         private readonly PostService _postService;

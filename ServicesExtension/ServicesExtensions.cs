@@ -14,12 +14,14 @@ namespace Rule4.ServicesExtension
             services.AddAuthorization();
             services.AddEndpointsApiExplorer();
             
-
             services.AddScoped<IMapper, Mapper>();
+
             services.AddScoped<BaseService>();
             services.AddScoped<PostService>();
+            services.AddScoped<TagService>();
 
             services.AddTransient<PostController>();
+            services.AddTransient<TagController>();
             services.AddSwaggerGen();
         }
     }

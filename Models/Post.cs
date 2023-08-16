@@ -11,8 +11,9 @@ namespace Rule4.Models
         public string UserId { get; set; }
         public long LikeCount { get; set; }
         public long ViewCount { get; set; }
-        public virtual List<Tag> Tags { get; set; }
+        public List<Tag> Tags { get; set; }
         public string FileId { get; set; }
-        public virtual File File { get; set; }
+        public File File { get; set; }
+        public DateTime? Added { get; set; }
     }
 }

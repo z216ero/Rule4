@@ -12,11 +12,13 @@ namespace Rule4.Models
         public string Name { get; set; }
         [Required]
         public string Code { get; set; }
+        public List<Post> Posts { get; set; }
         public Type Type { get; set; }
     }
 
     public enum Type
     {
+        Copyright,
         General,
         Artist,
         Character

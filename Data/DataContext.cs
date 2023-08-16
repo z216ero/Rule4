@@ -20,8 +20,7 @@ namespace Rule4.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies();
+            
         }
-
     }
 }

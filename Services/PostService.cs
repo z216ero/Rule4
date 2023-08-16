@@ -1,6 +1,5 @@
 ﻿using Mapster;
 using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
 using Rule4.Data;
 using Rule4.Dto.Posts;
 using Rule4.Models;
@@ -23,10 +22,16 @@ namespace Rule4.Services
 
         public GetPostDto GetPost(long id)
         {
-            var post = _dataContext.Posts
-                .FirstOrDefault(p => p.Id == id);
 
-            return post.Adapt<GetPostDto>();
+            var post = _dataContext.Posts.FirstOrDefault(p => p.Id == id);
+            if (post != null)
+            {
+                var postTags = _dataContext.Tags.Where(p => p.Posts.Any(c => c.Id == id)).ToList();
+                post.Tags = postTags;
+                return post.Adapt<GetPostDto>();
+            }
+
+            return null;
         }
 
         public async Task<Post> AddPost(AddPostDto dto)

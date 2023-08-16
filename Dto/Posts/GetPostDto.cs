@@ -9,5 +9,6 @@ namespace Rule4.Dto.Posts
         public long LikeCount { get; set; }
         public long ViewCount { get; set; }
         public List<Tag> Tags { get; set; }
+        public DateTime? Added { get; set; }
     }
 }
