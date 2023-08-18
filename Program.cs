@@ -36,6 +36,7 @@ namespace Rule4
             });
             builder.Services.AddAuthorization();
 
+
             builder.Services.AddDbContext<DataContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("connection")));
             builder.Services.ConfigureServices();
             builder.Services.AddCors();
@@ -48,14 +49,15 @@ namespace Rule4
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseCors(c => c.AllowAnyOrigin());
+            
             app.UseMiddleware<CustomExceptionHandlerMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
+
+            app.UseCors("AllowAll");
 
             app.Run();
         }

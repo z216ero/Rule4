@@ -14,5 +14,12 @@ namespace Rule4.Services
         {
             return _dataContext.Tags.ToList();
         }
+
+        public async Task<bool> SaveTag(Tag tag)
+        {
+            _dataContext.Tags.Add(tag);
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
     }
 }

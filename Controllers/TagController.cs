@@ -21,5 +21,13 @@ namespace Rule4.Controllers
             var tags = _tagService.GetAllTags();
             return Ok(tags);
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [HttpPost("Add")]
+        public async Task<IActionResult> AddTag([FromBody] Tag tag)
+        {
+            await _tagService.SaveTag(tag);
+            return Ok(true);
+        }
     }
 }

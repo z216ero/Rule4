@@ -23,6 +23,12 @@ namespace Rule4.ServicesExtension
             services.AddTransient<PostController>();
             services.AddTransient<TagController>();
             services.AddSwaggerGen();
+
+            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
         }
     }
 }
