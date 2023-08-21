@@ -17,9 +17,15 @@ namespace Rule4.Services
 
         public async Task<bool> SaveTag(Tag tag)
         {
-            _dataContext.Tags.Add(tag);
-            await _dataContext.SaveChangesAsync();
-            return true;
+            var existTag = _dataContext.Tags.FirstOrDefault(x => x.Code == tag.Code || x.Name == tag.Name);
+            if (existTag == null)
+            {
+                _dataContext.Tags.Add(tag);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

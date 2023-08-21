@@ -26,8 +26,12 @@ namespace Rule4.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> AddTag([FromBody] Tag tag)
         {
-            await _tagService.SaveTag(tag);
-            return Ok(true);
+            var addResult = await _tagService.SaveTag(tag);
+            if (addResult)
+            {
+                return Ok(true);
+            }
+            return BadRequest();
         }
     }
 }
