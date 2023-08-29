@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rule4.Dto.Tags;
 using Rule4.Models;
 using Rule4.Services;
 
@@ -19,6 +20,14 @@ namespace Rule4.Controllers
         public IActionResult Get()
         {
             var tags = _tagService.GetAllTags();
+            return Ok(tags);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetTagByNameDto>))]
+        [HttpGet("GetByName")]
+        public IActionResult GetByName(string name = "")
+        {
+            var tags = _tagService.GetTagsByName(name);
             return Ok(tags);
         }
 

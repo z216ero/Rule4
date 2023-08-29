@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Rule4.CustomMiddleware;
 using Rule4.Data;
+using Rule4.Profiles;
 using Rule4.ServicesExtension;
 
 namespace Rule4
@@ -38,7 +39,10 @@ namespace Rule4
 
 
             builder.Services.AddDbContext<DataContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("connection")));
+
             builder.Services.ConfigureServices();
+            builder.Services.RegisterMapsterConfiguration();
+
             builder.Services.AddCors();
 
             var app = builder.Build();
