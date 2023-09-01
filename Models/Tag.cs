@@ -13,10 +13,10 @@ namespace Rule4.Models
         [Required]
         public string Code { get; set; }
         public List<Post> Posts { get; set; }
-        public Type Type { get; set; }
+        public TagType Type { get; set; }
     }
 
-    public enum Type
+    public enum TagType
     {
         Copyright,
         General,

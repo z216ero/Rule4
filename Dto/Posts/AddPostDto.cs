@@ -1,10 +1,10 @@
-﻿using Rule4.Models;
+﻿using Rule4.Dto.Tags;
 
 namespace Rule4.Dto.Posts
 {
     public class AddPostDto
     {
-        public string UserId { get; set; }
-        public List<Tag> Tags { get; set; }
+        public string Tags { get; set; }
+        public IFormFile File { get; set; }
     }
 }

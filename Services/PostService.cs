@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MapsterMapper;
+using Newtonsoft.Json;
 using Rule4.Data;
 using Rule4.Dto.Posts;
 using Rule4.Models;
@@ -22,7 +23,6 @@ namespace Rule4.Services
 
         public GetPostDto GetPost(long id)
         {
-
             var post = _dataContext.Posts.FirstOrDefault(p => p.Id == id);
             if (post != null)
             {
@@ -36,10 +36,18 @@ namespace Rule4.Services
 
         public async Task<Post> AddPost(AddPostDto dto)
         {
-            var mappedPost = _mapper.Map<Post>(dto);
-            _dataContext.Posts.Add(mappedPost);
+            var tags = JsonConvert.DeserializeObject<List<Tag>>(dto.Tags);
+            var newPost = new Post()
+            {
+                Tags = tags,
+                Added = DateTime.UtcNow,
+                FileExtension = Path.GetExtension(dto.File.FileName)
+            };
+
+            _dataContext.Posts.Add(newPost);
+
             await _dataContext.SaveChangesAsync();
-            return mappedPost;
+            return newPost;
         }
 
         public async Task<bool> DeletePost(long id)

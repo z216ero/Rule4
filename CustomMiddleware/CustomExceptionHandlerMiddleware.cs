@@ -20,7 +20,7 @@ namespace Rule4.CustomMiddleware
             catch (Exception ex)
             {
                 // Обработка исключения и формирование пользовательского сообщения об ошибке
-                string errorMessage = "Произошла ошибка при выполнении запроса.";
+                string errorMessage = $"{ex.Message}";
 
                 // Формирование ответа с пользовательским сообщением об ошибке
                 context.Response.StatusCode = 500; // Установка соответствующего статуса ошибки (например, 500 Internal Server Error)

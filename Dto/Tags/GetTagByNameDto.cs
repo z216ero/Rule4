@@ -7,6 +7,6 @@ namespace Rule4.Dto.Tags
         public string Name { get; set; }
         public string Code { get; set; }
         public int PostCount { get; set; }
-        public Models.Type Type { get; set; }
+        public Models.TagType Type { get; set; }
     }
 }

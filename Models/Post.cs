@@ -7,13 +7,13 @@ namespace Rule4.Models
     public class Post
     {
         [Key]
-        public int Id { get; set; }    
+        public int Id { get; set; }
         public string UserId { get; set; }
         public long LikeCount { get; set; }
         public long ViewCount { get; set; }
         public List<Tag> Tags { get; set; }
-        public string FileId { get; set; }
-        public File File { get; set; }
+        public string Source { get; set; }
+        public string FileExtension { get; set; }
         public DateTime? Added { get; set; }
     }
 }
